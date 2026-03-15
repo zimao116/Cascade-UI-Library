@@ -11242,6 +11242,35 @@ return {
 		},
 	},
 
+	Mong = {
+		_id = "Mong",
+
+		Dark = {
+			SwitchAccent = Color3.fromHex("#AF52DE"),
+			Selection = Color3.fromHex("#9B40CC"),
+			SelectionFocused = Color3.fromHex("#AD50DC"),
+			Toggle = { SwitchOn = Color3.fromHex("#AF52DE") },
+			Button = {
+				FillPrimary = ColorSequence.new({
+					ColorSequenceKeypoint.new(0, Color3.fromRGB(185, 100, 230)),
+					ColorSequenceKeypoint.new(1, Color3.fromRGB(160, 60, 210)),
+				}),
+			},
+		},
+		Light = {
+			SwitchAccent = Color3.fromHex("#AF52DE"),
+			Selection = Color3.fromHex("#9B40CC"),
+			SelectionFocused = Color3.fromHex("#AD50DC"),
+			Toggle = { SwitchOn = Color3.fromHex("#AF52DE") },
+			Button = {
+				FillPrimary = ColorSequence.new({
+					ColorSequenceKeypoint.new(0, Color3.fromRGB(175, 82, 222)),
+					ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 55, 200)),
+				}),
+			},
+		},
+	},
+
 	Purple = {
 		_id = "Purple",
 		Dark = {
