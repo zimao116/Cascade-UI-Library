@@ -168,6 +168,11 @@ function SaveManager:SetApp(app)
     self.App = app
 end
 
+function SaveManager:SetFolder(folder)
+    self.Folder = folder
+    self:BuildFolderTree()
+end
+
 function SaveManager:BuildFolderTree()
     local paths = {
         self.Folder,
