@@ -54,6 +54,15 @@ SaveManager.Parser = {
         Load = function(idx, value)
             if SaveManager.Options[idx] and type(value) == "string" then
                 SaveManager.Options[idx].Value = value
+
+                task.defer(function()
+                    local option = SaveManager.Options[idx]
+                    if option and option.Structures then
+                        option.Structures.Field.TextTruncate = Enum.TextTruncate.AtEnd
+                        option.Structures.Body.AutomaticSize = Enum.AutomaticSize.None
+                        option.Structures.Body.Size = UDim2.fromOffset(150, 23)
+                    end
+                end)
             end
         end,
     },
