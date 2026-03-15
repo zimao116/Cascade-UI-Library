@@ -7881,10 +7881,13 @@ local binder = __DIST.c()
 
 	structures.Field.Focused:Connect(function()
 		structures.Body.AutomaticSize = Enum.AutomaticSize.XY
+		structures.Field.TextTruncate = Enum.TextTruncate.None
 	end)
 
 	structures.Field.FocusLost:Connect(function()
 		structures.Body.AutomaticSize = Enum.AutomaticSize.None
+		structures.Body.Size = UDim2.fromOffset(150, 23)
+		structures.Field.TextTruncate = Enum.TextTruncate.AtEnd
 
 		if object.Value ~= structures.Field.Text then
 			object.Value = structures.Field.Text
