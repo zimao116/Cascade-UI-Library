@@ -4,7 +4,7 @@ local localPlayer = Players.LocalPlayer
 
 local SaveManager = {}
 
-SaveManager.Folder = "The Forge - ReaperX"
+SaveManager.Folder = "Zimao"
 SaveManager.SubFolder = "User"
 SaveManager.Ignore = {}
 SaveManager.Options = {}
@@ -89,15 +89,30 @@ SaveManager.Parser = {
     },
 
     PopUpButton = {
-        Save = function(idx, object)
-            return object.Value
-        end,
-        Load = function(idx, value)
-            if SaveManager.Options[idx] then
+    Save = function(idx, object)
+        local options = object.Options
+        if options and object.Value then
+            return options[object.Value]
+        end
+        return object.Value
+    end,
+    Load = function(idx, value)
+        if SaveManager.Options[idx] then
+            local options = SaveManager.Options[idx].Options
+            if options and type(value) == "string" then
+                for i, name in ipairs(options) do
+                    if name == value then
+                        SaveManager.Options[idx].Value = i
+                        return
+                    end
+                end
+                SaveManager.Options[idx].Value = 1
+            else
                 SaveManager.Options[idx].Value = value
             end
-        end,
-    },
+        end
+    end,
+},
 
     RadioButtonGroup = {
         Save = function(idx, object)
