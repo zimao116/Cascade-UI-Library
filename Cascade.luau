@@ -10742,40 +10742,21 @@ local effects = __DIST.h()
 		end)
 	end
 
-    properties.MinimizeKey = properties.MinimizeKey or Enum.KeyCode.LeftControl
-
     do
-        local minimizeConnection
-
-        minimizeConnection = userInputService.InputBegan:Connect(function(input, gameProcessed)
-            if gameProcessed or input.UserInputType ~= Enum.UserInputType.Keyboard then return end
-
+        userInputService.InputBegan:Connect(function(input, gameProcessed)
+            if userInputService:GetFocusedTextBox() then return end
             local keyToToggle = Enum.KeyCode.LeftControl
-
             if type(object.MinimizeKey) == "table" and object.MinimizeKey.Type == "KeybindField" then
-                if object.MinimizeKey.Value and typeof(object.MinimizeKey.Value) == "EnumItem" then
-                    keyToToggle = object.MinimizeKey.Value
-                end
-
-            elseif typeof(object.MinimizeKey) == "EnumItem" then
-                keyToToggle = object.MinimizeKey
+                if object.MinimizeKey.Value then
+                	keyToToggle = object.MinimizeKey.Value
+				end
+			elseif typeof(object.MinimizeKey) == "EnumItem" then
+				keyToToggle = object.MinimizeKey
             end
-
-            if input.KeyCode == keyToToggle then
-
-                properties.Minimized = not properties.Minimized
-                bindings.Minimized(properties.Minimized, true)
-            end
+			if input.KeyCode == keyToToggle then
+				object.Minimized = not object.Minimized
+			end
         end)
-
-        if structures.Body and structures.Body.__instance then
-            structures.Body.__instance.Destroying:Connect(function()
-                if minimizeConnection then
-                    minimizeConnection:Disconnect()
-                    minimizeConnection = nil
-                end
-            end)
-        end
     end
 
 	binder.Apply(properties, object)
