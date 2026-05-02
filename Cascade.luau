@@ -10742,6 +10742,8 @@ local effects = __DIST.h()
 		end)
 	end
 
+    properties.MinimizeKey = properties.MinimizeKey or Enum.KeyCode.LeftControl
+
     do
         local minimizeConnection
 
@@ -10751,15 +10753,18 @@ local effects = __DIST.h()
             local keyToToggle = Enum.KeyCode.LeftControl
 
             if type(object.MinimizeKey) == "table" and object.MinimizeKey.Type == "KeybindField" then
-                if object.MinimizeKey.Value then
+                if object.MinimizeKey.Value and typeof(object.MinimizeKey.Value) == "EnumItem" then
                     keyToToggle = object.MinimizeKey.Value
                 end
+
             elseif typeof(object.MinimizeKey) == "EnumItem" then
                 keyToToggle = object.MinimizeKey
             end
 
             if input.KeyCode == keyToToggle then
-                object.Minimized = not object.Minimized
+
+                properties.Minimized = not properties.Minimized
+                bindings.Minimized(properties.Minimized, true)
             end
         end)
 
